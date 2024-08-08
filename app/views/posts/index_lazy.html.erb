@@ -1,0 +1,6 @@
+# this will be inserted into the turbo_frame_tag in posts/index.html.erb
+
+<%= turbo_frame_tag :posts_lazy do %>
+  Count: <%= @posts.count %>
+  <%= render @posts %>
+<% end %>

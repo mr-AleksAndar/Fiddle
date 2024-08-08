@@ -1,0 +1,12 @@
+
+
+<%= turbo_frame_tag "new_post" do %>
+  <%= render 'form', post: @post %>
+<% end %>
+
+<div id="posts">
+  <%= turbo_stream_from "posts" %>
+  <%= turbo_frame_tag "posts" do %>
+    <%= render @posts %>
+  <% end %>
+</div>

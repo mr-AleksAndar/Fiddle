@@ -1,0 +1,5 @@
+<%= turbo_frame_tag dom_id(post) do %>
+<div id="<%= dom_id(post) %>">
+  <h2><%= post.title %></h2>
+</div>
+<% end %>
