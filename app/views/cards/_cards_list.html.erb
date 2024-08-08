@@ -1,0 +1,5 @@
+<% cards.order(id: :desc).each do |card| %>
+  <tr id="<%= dom_id(card) %>">
+    <%= render partial: 'cards/card', locals: { card: card } %>
+  </tr>
+<% end %>

@@ -1,0 +1,30 @@
+<!-- app/views/cards/_scores_list.html.erb -->
+<% if card %>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% card.scores.includes(:user).each do |score| %>
+        <tr>
+          <td><%= score.user.name %></td>
+          <td>
+              <% if score.score.present? %>
+                ✅
+              <% else %>
+                ❌
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-warning">
+    Error: Card is nil.
+  </div>
+<% end %>

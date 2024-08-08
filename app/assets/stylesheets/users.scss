@@ -1,0 +1,67 @@
+.user {
+    display: flex; /* Use flexbox layout for user section */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: flex-start; /* Align items to the start */
+    padding: 20px; /* Add padding around the user section */
+    background-color: #F7F9F9; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the section */
+  }
+  
+  .user h1 {
+    font-size: 24px; /* Adjusted font size for the user's name */
+    font-weight: 600; /* Bold font for emphasis */
+    color: #0B2F37; /* Consistent color with existing styles */
+    margin-bottom: 10px; /* Space below the user's name */
+  }
+  
+  .user h2 {
+    font-size: 16px; /* Smaller font size for email */
+    color: #127388; /* Use color consistent with buttons */
+    margin-bottom: 20px; /* Space below the user's email */
+  }
+  
+  .actions {
+    margin-top: 20px; /* Space above the actions */
+  }
+  
+  .actions .button.edit {
+    background: #F0A500; /* Different background for the edit button */
+    color: #FFF; /* White text color */
+  }
+  
+  .actions .button.edit:hover {
+    background: #D78A00; /* Darker background on hover */
+  }
+  
+  .actions .button.edit:active {
+    background: #C37A00; /* Even darker when active */
+  }
+  
+  .users {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+  }
+  
+  .users li {
+    padding: 10px 0; /* Padding for each user item */
+    border-bottom: 1px solid #CDDEDE; /* Divider between users */
+    color: #0B2F37; /* Text color consistent with titles */
+  }
+  
+  .users li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+  }
+  
+  .users a {
+    color: #127388; /* Consistent link color */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: 600; /* Bold link text */
+  }
+  
+  .users a:hover {
+    text-decoration: underline; /* Underline on hover for emphasis */
+  }
+  

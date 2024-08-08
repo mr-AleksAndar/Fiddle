@@ -1,0 +1,83 @@
+.form-container {
+    max-width: 500px; /* Limit the form width */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Padding around the form */
+    background-color: #F7F9F9; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+  
+  .form-container h1 {
+    font-size: 24px; /* Font size for form header */
+    font-weight: 600; /* Bold font for emphasis */
+    color: #0B2F37; /* Color matching the rest of the UI */
+    margin-bottom: 20px; /* Space below the header */
+  }
+  
+  .form-container label {
+    display: block; /* Ensure label is on its own line */
+    font-size: 16px; /* Font size for labels */
+    font-weight: 600; /* Bold labels for clarity */
+    color: #0B2F37; /* Consistent color with other text */
+    margin-bottom: 8px; /* Space below the label */
+  }
+  
+  .form-container input[type="text"],
+  .form-container input[type="email"],
+  .form-container input[type="password"] {
+    width: 100%; /* Full width for text inputs */
+    padding: 10px; /* Padding inside the input fields */
+    margin-bottom: 16px; /* Space below each input */
+    border: 1px solid #CDDEDE; /* Border around inputs */
+    border-radius: 4px; /* Slightly rounded corners */
+    box-sizing: border-box; /* Include padding and border in total width */
+    font-size: 16px; /* Font size for input text */
+    font-family: Poppins, sans-serif; /* Font family for inputs */
+    outline: none; /* Remove default outline */
+  }
+  
+  .form-container .form-group {
+    margin-bottom: 16px; /* Space below each group */
+  }
+  
+  .form-container .form-group.admin {
+    display: flex; /* Align checkbox and label horizontally */
+    align-items: center; /* Vertically center checkbox with label */
+  }
+  
+  .form-container .form-group.admin label {
+    display: inline; /* Display label inline with checkbox */
+    margin-bottom: 0; /* Remove bottom margin from admin label */
+    margin-left: 8px; /* Space between checkbox and label */
+  }
+  
+  .form-container input[type="checkbox"] {
+    margin-left: 8px; /* Space between checkbox and label */
+  }
+  
+  .form-container input[type="submit"] {
+    display: inline-block; /* Display as inline block */
+    width: 100%; /* Full width for button */
+    padding: 10px 16px; /* Padding around the submit button */
+    border-radius: 40px; /* Rounded corners */
+    background: #127388; /* Background color for submit button */
+    color: #FFF; /* Text color */
+    border: none; /* Remove border */
+    font-size: 16px; /* Font size */
+    font-family: Poppins, sans-serif; /* Font family */
+    font-weight: 600; /* Bold font weight */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); /* Subtle shadow */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover */
+  }
+  
+  .form-container input[type="submit"]:hover {
+    background: #0F5B72; /* Darker shade on hover */
+    box-shadow: 0px 2px 4px rgba(16, 24, 40, 0.1); /* Enhanced shadow */
+  }
+  
+  .form-container input[type="submit"]:active {
+    background: #0E4B59; /* Even darker on active */
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); /* Reset shadow */
+  }
+  

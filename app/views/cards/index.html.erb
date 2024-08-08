@@ -1,0 +1,20 @@
+<div class="main-container">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <%= turbo_frame_tag "new_card" do %>
+            <%= render 'form', card: @card %>
+          <% end %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= turbo_stream_from "cards" %>
+      <%= turbo_frame_tag "cards" do %>
+        <%= render 'cards/cards_list', cards: @cards %>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
