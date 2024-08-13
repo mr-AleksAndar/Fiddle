@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-
+  def is_admin?
+    self.admin
+  end
   def show
     @user = User.find(params[:id])
   end
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   def require_correct_user

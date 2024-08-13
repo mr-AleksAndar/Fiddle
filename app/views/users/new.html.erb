@@ -1,40 +1,44 @@
-<h1>Sign Up</h1>
+<div class="form-container">
+  <h1>Sign Up</h1>
+  
+  <%= form_with(model: @user, local: true) do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_with(model: @user, local: true) do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.email_field :email, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "Sign Up", class: "form-button" %>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="signup-link">
+    <%= link_to 'Sign In', new_session_path, class: "signup-button" %>
   </div>
-
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign Up" %>
-  </div>
-<% end %>
-
-<%= link_to 'Sign In', new_session_path %>
+</div>

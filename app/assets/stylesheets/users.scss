@@ -1,67 +1,138 @@
+.users-list {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.user-row {
+  display: flex;
+  justify-content: space-between; /* Space between user name and buttons */
+  align-items: center; /* Align items vertically in the center */
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd; /* Add a subtle border between users */
+}
+
+.user-info {
+  flex-grow: 1; /* Allow user name to take up available space */
+}
+
+.user-name-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: #127388;
+  text-decoration: none;
+}
+
+.user-name-link:hover {
+  text-decoration: underline; /* Add underline on hover for clarity */
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.button {
+  width: 100px; /* Set a fixed width for all buttons */
+  height: 40px; /* Set a fixed height for all buttons */
+  padding: 0; /* Remove padding to standardize size */
+  text-decoration: none;
+  border-radius: 20px; /* Rounder buttons */
+  font-weight: 600;
+  background-color: #127388;
+  color: #fff;
+  display: inline-flex; /* Use inline-flex for consistent button sizing */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  text-align: center;
+  margin: 0;
+}
+
+.button:hover {
+  background-color: #0E5B72;
+}
+
+.button:active {
+  background-color: #0C4C59;
+}
+
 .user {
-    display: flex; /* Use flexbox layout for user section */
-    flex-direction: column; /* Arrange children in a column */
-    align-items: flex-start; /* Align items to the start */
-    padding: 20px; /* Add padding around the user section */
-    background-color: #F7F9F9; /* Light background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    margin-bottom: 20px; /* Space below the section */
-  }
-  
-  .user h1 {
-    font-size: 24px; /* Adjusted font size for the user's name */
-    font-weight: 600; /* Bold font for emphasis */
-    color: #0B2F37; /* Consistent color with existing styles */
-    margin-bottom: 10px; /* Space below the user's name */
-  }
-  
-  .user h2 {
-    font-size: 16px; /* Smaller font size for email */
-    color: #127388; /* Use color consistent with buttons */
-    margin-bottom: 20px; /* Space below the user's email */
-  }
-  
-  .actions {
-    margin-top: 20px; /* Space above the actions */
-  }
-  
-  .actions .button.edit {
-    background: #F0A500; /* Different background for the edit button */
-    color: #FFF; /* White text color */
-  }
-  
-  .actions .button.edit:hover {
-    background: #D78A00; /* Darker background on hover */
-  }
-  
-  .actions .button.edit:active {
-    background: #C37A00; /* Even darker when active */
-  }
-  
-  .users {
-    list-style: none; /* Remove default list styling */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-  }
-  
-  .users li {
-    padding: 10px 0; /* Padding for each user item */
-    border-bottom: 1px solid #CDDEDE; /* Divider between users */
-    color: #0B2F37; /* Text color consistent with titles */
-  }
-  
-  .users li:last-child {
-    border-bottom: none; /* Remove border from the last item */
-  }
-  
-  .users a {
-    color: #127388; /* Consistent link color */
-    text-decoration: none; /* Remove underline from links */
-    font-weight: 600; /* Bold link text */
-  }
-  
-  .users a:hover {
-    text-decoration: underline; /* Underline on hover for emphasis */
-  }
-  
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center content horizontally */
+  padding: 20px;
+  background-color: #F7F9F9; /* Light background color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  margin-bottom: 20px;
+  max-width: 400px;
+  margin: 20px auto; /* Center the user box horizontally */
+}
+
+.user-name {
+  font-size: 24px; /* Font size for the user's name */
+  font-weight: 600; /* Bold font for emphasis */
+  color: #0B2F37; /* Consistent color with titles */
+  margin-bottom: 10px; /* Space below the user's name */
+  text-align: center; /* Center the user's name */
+}
+
+.user-email {
+  font-size: 16px; /* Smaller font size for email */
+  color: #127388; /* Use color consistent with links */
+  margin-bottom: 20px; /* Space below the user's email */
+  text-align: center; /* Center the user's email */
+}
+
+.actions {
+  display: flex;
+  justify-content: center; /* Center actions horizontally */
+  gap: 10px; /* Space between buttons */
+  align-items: center; /* Align buttons vertically in the center */
+  margin-top: 20px; /* Space above the actions */
+}
+
+/* Specific button styles within the user page */
+.actions .button {
+  width: 100px; /* Set a fixed width for all buttons */
+  height: 40px; /* Set a fixed height for all buttons */
+  padding: 0; /* Remove padding to ensure consistency */
+  text-decoration: none;
+  border-radius: 20px; /* Rounded corners */
+  font-weight: 600;
+  background-color: #127388;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.actions .button:hover {
+  background-color: #0F5B72; /* Darker background on hover */
+}
+
+.actions .button:active {
+  background-color: #0E4B59; /* Even darker on active */
+}
+
+.actions .back-link,
+.actions .sign-out-link {
+  color: #127388;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px; /* Padding to ensure buttons and links align */
+  border-radius: 20px; /* Rounded corners for consistency */
+  background-color: transparent; /* No background by default */
+}
+
+.actions .back-link:hover,
+.actions .sign-out-link:hover {
+  text-decoration: underline; /* Underline on hover for clarity */
+}
+
+.actions .back-link:active,
+.actions .sign-out-link:active {
+  color: #0E4B59; /* Darker shade on active */
+}

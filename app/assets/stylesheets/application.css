@@ -8,7 +8,6 @@
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
  *
  *= require_tree .
  *= require_self
@@ -17,251 +16,255 @@
  @import "users";
  @import "forms";
  
+ /* General Button Styles */
+ .button, .edit-button, .delete-button, .score-button, .new-card-button, input[type="submit"] {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     width: 100px; /* Fixed width for uniform size */
+     height: 40px; /* Fixed height for all buttons */
+     padding: 0; /* Zero padding to prevent size variation */
+     text-decoration: none;
+     border-radius: 20px; /* Consistent rounded corners */
+     font-weight: 600;
+     background-color: #127388;
+     color: #fff;
+     border: none;
+     font-size: 16px; /* Consistent font size */
+     font-family: Poppins, sans-serif;
+     cursor: pointer;
+     white-space: nowrap; /* Prevent text from wrapping */
+ }
+ 
+ .button:hover, .edit-button:hover, .delete-button:hover, .score-button:hover, .new-card-button:hover, input[type="submit"]:hover {
+     background-color: #0F5B72; /* Slightly darker shade for hover effect */
+ }
+ 
+ .button:active, .edit-button:active, .delete-button:active, .score-button:active, .new-card-button:active, input[type="submit"]:active {
+     background-color: #0E4B59; /* Darker shade when button is pressed */
+ }
+ 
+ .button:disabled, .edit-button:disabled, .delete-button:disabled, .score-button:disabled, .new-card-button:disabled, input[type="submit"]:disabled {
+     background-color: #E0E0E0; /* Light gray background for disabled state */
+     color: #ffffff; /* Gray text color for disabled state */
+     cursor: not-allowed; /* Change cursor to not-allowed for disabled state */
+ }
+ 
+ /* Logo and Header Styles */
  .logo-container {
-    display: flex;
-    align-items: center; /* Vertical centering */
-    gap: 10px; /* Adjust gap as needed */
-    border-bottom: 1px solid #CDDEDE;
-    background: #FFF;
-    position: relative;
-    width: 100vw; /* Full viewport width */
-    left: 50%; /* Shift by half viewport width */
-    margin-left: -50vw; /* Compensate for the shift */
-    box-sizing: border-box; /* Include padding and border in total width */
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .logo {
-    user-select: none; /* Prevents text selection */
-    -webkit-user-drag: none; /* Prevents image dragging in WebKit browsers */
-    cursor: pointer; /* Pointer cursor to indicate it’s clickable */
-    text-decoration: none; /* Removes underline from links */
-    outline: none; /* Removes the default focus outline */
-  }
-  
-  .logo:hover,
-  .logo:focus,
-  .logo:active {
-    background-color: transparent; /* Ensures no background color change */
-    color: inherit; /* Ensures no color change on hover */
-  }
-  
-  .logo-container img {
-    user-select: none; /* Prevents text selection */
-    -webkit-user-drag: none; /* Prevents image dragging in WebKit browsers */
-    pointer-events: none; /* Disables all mouse events on the image */
-    padding-left: 16px; /* Add padding to the left of the logo */
-    padding-right: 0px; /* Add padding to the right of the logo */
-    margin-top: 0px;
-  }
-  
-  .divider-line {
-    width: 29px;
-    height: 0;
-    transform: rotate(90deg);
-    transform-origin: -50 0;
-    border: 1px #0B2F37 solid;
-    margin: 0 0px; /* Adjust margin as needed */
-  }
-  
-  .title {
-    color: #0B2F37;
-    font-size: 32px;
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    line-height: 56px;
-    white-space: nowrap;
-    margin-left: 0px; /* Adjust margin here */
-  }
-  
-  .button {
-    display: flex; /* Flexbox layout */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    padding: 10px 16px; /* Padding around the button */
-    gap: 6px; /* Gap between items (if any) inside the button */
-    border-radius: 40px; /* Rounded corners */
-    background: #127388; /* Background color */
-    color: #FFF; /* Text color */
-    border: none; /* Remove default border */
-    font-size: 16px; /* Font size */
-    font-family: Poppins, sans-serif; /* Font family */
-    font-weight: 600; /* Font weight */
-    text-decoration: none; /* Remove underline from links */
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05); /* Subtle shadow effect */
-    cursor: pointer; /* Pointer cursor on hover */
-    align-self: stretch; /* Stretch to fit container if necessary */
-    white-space: nowrap; /* Prevent text wrapping */
-  }
-  .button + .button {
-    margin-top: 10px; /* Space between buttons */
-  }
-  
-  .button:hover {
-    background: #0F5B72; /* Slightly lighter shade for hover effect */
-    box-shadow: 0px 2px 4px 0px rgba(16, 24, 40, 0.1); /* Enhanced shadow effect on hover */
-  }
-  
-  .button:active {
-    background: #0E4B59; /* Darker shade when button is pressed */
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05); /* Reset shadow effect when pressed */
-  }
-  
-  .button:disabled {
-    background: #E0E0E0; /* Light gray background for disabled state */
-    color: #ffffff; /* Gray text color for disabled state */
-    box-shadow: none; /* Remove shadow for disabled state */
-    cursor: not-allowed; /* Change cursor to not-allowed for disabled state */
-  }
+     display: flex;
+     align-items: center; /* Vertical centering */
+     gap: 10px; /* Adjust gap as needed */
+     border-bottom: 1px solid #CDDEDE;
+     background: #FFF;
+     position: relative;
+     width: 100vw; /* Full viewport width */
+     left: 50%; /* Shift by half viewport width */
+     margin-left: -50vw; /* Compensate for the shift */
+     box-sizing: border-box; /* Include padding and border in total width */
+     margin-top: 10px;
+     margin-bottom: 20px;
+ }
+ 
+ .logo {
+     user-select: none; /* Prevents text selection */
+     -webkit-user-drag: none; /* Prevents image dragging in WebKit browsers */
+     cursor: pointer; /* Pointer cursor to indicate it’s clickable */
+     text-decoration: none; /* Removes underline from links */
+     outline: none; /* Removes the default focus outline */
+ }
+ 
+ .logo:hover, .logo:focus, .logo:active {
+     background-color: transparent; /* Ensures no background color change */
+     color: inherit; /* Ensures no color change on hover */
+ }
+ 
+ .logo-container img {
+     user-select: none; /* Prevents text selection */
+     -webkit-user-drag: none; /* Prevents image dragging in WebKit browsers */
+     pointer-events: none; /* Disables all mouse events on the image */
+     padding-left: 16px; /* Add padding to the left of the logo */
+     padding-right: 0px; /* Add padding to the right of the logo */
+     margin-top: 0px;
+ }
+ 
+ .divider-line {
+     width: 29px;
+     height: 0;
+     transform: rotate(90deg);
+     transform-origin: -50 0;
+     border: 1px #0B2F37 solid;
+     margin: 0 0px; /* Adjust margin as needed */
+ }
+ 
+ .title {
+     color: #0B2F37;
+     font-size: 32px;
+     font-family: Poppins, sans-serif;
+     font-weight: 600;
+     line-height: 56px;
+     white-space: nowrap;
+     margin-left: 0px; /* Adjust margin here */
+ }
+ 
+ /* Form Container Styles */
+ .form-container {
+     width: 100%;
+     max-width: 500px !important; /* Limit the form width */
+     margin: 0 auto; /* Center the form horizontally */
+     padding: 20px; /* Padding around the form */
+     background-color: #F7F9F9; /* Light background color */
+     border-radius: 8px; /* Rounded corners */
+     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+ }
+ 
+ .form-container h1 {
+     font-size: 24px; /* Font size for form header */
+     font-weight: 600; /* Bold font for emphasis */
+     color: #0B2F37; /* Color matching the rest of the UI */
+     margin-bottom: 20px; /* Space below the header */
+ }
+ 
+ .form-container label {
+     display: block; /* Ensure label is on its own line */
+     font-size: 16px; /* Font size for labels */
+     font-weight: 600; /* Bold labels for clarity */
+     color: #0B2F37; /* Consistent color with other text */
+     margin-bottom: 8px; /* Space below the label */
+ }
+ 
+ .form-container input[type="text"], .form-container input[type="email"], .form-container input[type="password"] {
+     width: 100%; /* Full width for text inputs */
+     padding: 10px; /* Padding inside the input fields */
+     margin-bottom: 16px; /* Space below each input */
+     border: 1px solid #CDDEDE; /* Border around inputs */
+     border-radius: 4px; /* Slightly rounded corners */
+     box-sizing: border-box; /* Include padding and border in total width */
+     font-size: 16px; /* Font size for input text */
+     font-family: Poppins, sans-serif; /* Font family for inputs */
+     outline: none; /* Remove default outline */
+ }
+ 
+ .form-container .form-group {
+     margin-bottom: 16px; /* Space below each group */
+ }
+ 
+ .form-container .form-group.admin {
+     display: flex; /* Align checkbox and label horizontally */
+     align-items: center; /* Vertically center checkbox with label */
+ }
+ 
+ .form-container .form-group.admin label {
+     display: inline; /* Display label inline with checkbox */
+     margin-bottom: 0; /* Remove bottom margin from admin label */
+     margin-left: 8px; /* Space between checkbox and label */
+ }
+ 
+ .form-container input[type="checkbox"] {
+     margin-left: 8px; /* Space between checkbox and label */
+ }
+ 
+ /* Main Container */
+ .main-container {
+     display: flex;
+     justify-content: center; /* Center content horizontally */
+     align-items: center; /* Center content vertically */
+ }
+ 
+ .right-aligned {
+     position: absolute;
+     right: 20px; /* Adjust distance from the right edge */
+     top: 50%; /* Vertically center if needed */
+     transform: translateY(-50%); /* Adjust for vertical centering */
+ }
+ 
+ /* Flash Messages */
+ .flash {
+     padding: 10px;
+     margin: 10px 0;
+     border-radius: 5px;
+     font-weight: bold;
+     text-align: center; /* Centers text horizontally */
+     display: flex;
+     justify-content: center; /* Centers content horizontally if you use flexbox */
+     align-items: center; /* Centers content vertically if you use flexbox */
+     height: 20px; /* Optional: Set a height if you want vertical centering */
+ }
+ 
+ .flash.notice {
+     background-color: #d4edda;
+     color: #155724;
+ }
+ 
+ .flash.alert {
+     background-color: #f8d7da;
+     color: #721c24;
+ }
+ 
+ /* User Info */
+ .user-info {
+     position: absolute;
+     right: 120px;
+     font-weight: bold; /* Makes the text bold */
+     color: #0F5B72; /* Sets a text color for readability */
+     margin-left: 15px; /* Adds space to the left of the user-info */
+     padding: 8px 12px; /* Adds padding around the text */
+ }
+ 
+ .user-info a {
+     text-decoration: none;
+     color: #155724;
+     font-weight: bold;
+     padding: 4px 8px;
+     border-radius: 4px;
+     display: inline-block;
+ }
+ 
+ .user-info a:hover {
+     color: #fff;
+     text-decoration: none;
+ }
+ 
+ .user-info a:active, .user-info a:visited {
+     color: #0056b3;
+ }
+ 
+ /* Score Buttons */
+ .score-buttons {
+     display: flex; /* Use flexbox to align buttons horizontally */
+     gap: 5px; /* Space between buttons */
+     margin-bottom: 30px;
+ }
 
-  .new-card-button {
-    display: inline-flex; /* Changed from absolute to inline-flex */
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px; /* Adjust padding to control button size */
-    gap: 6px; /* Adjust gap between content if needed */
-    border-radius: 40px;
-    background: #127388;
-    color: #FFF; /* White text color for normal state */
-    border: none;
-    font-size: 16px; /* Adjust font size if needed */
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-    cursor: pointer;
-    white-space: nowrap;
-    margin-bottom: 0px;
-    /* Additional sizing controls */
-    width: 100px; /* Adjust if you want a specific width */
-    height: auto; /* Adjust if you want a specific height */
-}
 
-  
-  .new-card-button:hover {
-    background: #0F5B72;
-    color: #ffffff;
-    box-shadow: 0px 2px 4px 0px rgba(16, 24, 40, 0.1);
-  }
-  
-  .new-card-button:active {
-    background: #0E4B59;
-    color: #ffffff;
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-  }
-  
-  .new-card-button:disabled {
-    background: #E0E0E0; /* Light gray background for disabled state */
-    color: #FFF; /* White text color for disabled state */
-    box-shadow: none;
-    cursor: not-allowed;
-  }
-  
-  .main-container {
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-  }
-  .form-container {
-    max-width: 500px; /* Limit the form width */
-    margin: 0 auto; /* Center the form horizontally */
-    padding: 20px; /* Padding around the form */
-    background-color: #F7F9F9; /* Light background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-  }
-  
-  .right-aligned {
-    position: absolute;
-    right: 20px; /* Adjust distance from the right edge */
-    top: 50%; /* Vertically center if needed */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-  }
-
-  .flash {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center; /* Centers text horizontally */
-    display: flex;
-    justify-content: center; /* Centers content horizontally if you use flexbox */
-    align-items: center; /* Centers content vertically if you use flexbox */
-    height: 20px; /* Optional: Set a height if you want vertical centering */
-  }
-  
-  .flash.notice {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .flash.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  .user-info {
-    position:absolute;
-    right: 120px;
-    font-weight: bold; /* Makes the text bold */
-    color: #0F5B72; /* Sets a text color for readability */
-    margin-left: 15px; /* Adds space to the left of the user-info */
-    padding: 8px 12px; /* Adds padding around the text */
-  }
-  
-/* Style the link inside user-info */
-.user-info a {
-  text-decoration: none;
-  color: #155724;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.user-info a:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-.user-info a:active,
-.user-info a:visited {
-  color: #0056b3;
-}
-/* Style for the container holding the score buttons */
-.score-buttons {
-  display: flex; /* Use flexbox to align buttons horizontally */
-  gap: 5px; /* Space between buttons */
-  margin-bottom: 30px;
-}
-
-/* Style for individual buttons */
 .score-button {
-  text-decoration: none; /* Removes underline from link */
-  color: #fff; /* White text color */
-  background-color: #127388; /* Button background color */
-  border: none; /* Removes default border */
-  padding: 5px 10px; /* Adds padding inside the button */
-  border-radius: 4px; /* Rounds the corners */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  font-size: 14px; /* Font size for button text */
-  flex: 0 1 auto; /* Allows the buttons to resize to fit the content */
-  margin-right: 4px; /* Adds space between buttons */
-}
-
-.score-button:hover {
+  text-decoration: none; 
+  color: #fff; 
+  background-color: #127388; 
+  border: none; 
+  padding: 5px 10px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  font-size: 14px; 
+  flex: 0 1 auto; 
+  margin-right: 4px; 
+  }
+  
+  .score-button:hover {
   background-color: #0F5B72; /* Darker background color on hover */
-}
-.score-message {
-  color: #6c757d; /* Gray text color for the message */
-  font-size: 12px; /* Adjust font size to fit within the container */
-  padding: 4px 8px; /* Reduce padding to fit the message */
-  border: 1px solid #dcdcdc; /* Border around the message */
-  border-radius: 4px; /* Rounds the corners */
-  background-color: #f8f9fa; /* Light background color for the message */
-  text-align: center; /* Center the message text */
-  word-wrap: break-word; /* Ensure text wraps within the container */
-  box-sizing: border-box; /* Ensure padding and border are included in the width */
-  width: 99%; /* Ensure the message fits within the container */
+  }
+  
+  .score-message {
+  color: #6c757d; 
+  font-size: 12px; 
+  padding: 4px 8px;
+  border: 1px solid #dcdcdc; 
+  border-radius: 4px; 
+  background-color: #f8f9fa; 
+  text-align: center; 
+  word-wrap: break-word; 
+  box-sizing: border-box; 
+  width: 99%; 
   margin-bottom: 30px;
-}
+  }
+  

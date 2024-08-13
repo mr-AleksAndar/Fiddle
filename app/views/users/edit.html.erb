@@ -1,4 +1,50 @@
-<div>
-  <h1 class="font-bold text-4xl">Users#edit</h1>
-  <p>Find me in app/views/users/edit.html.erb</p>
+<div class="form-container">
+  <h1>Edit User</h1>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @user, local: true) do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email, class: "form-input" %>
+    </div>
+
+    <% if current_user.admin? %>
+    <div class="checkbox-inline">
+      <%= form.label :admin, 'Admin', class: 'inline-label' %>
+      <%= form.check_box :admin %>
+    </div>
+    <% end %>
+
+    <div>
+      <%= form.label :password, "New Password" %>
+      <%= form.password_field :password, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= form.label :password_confirmation, "Confirm New Password" %>
+      <%= form.password_field :password_confirmation, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= form.submit "Save Changes", class: "button" %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= link_to "Back", users_path %>
+  </div>
 </div>

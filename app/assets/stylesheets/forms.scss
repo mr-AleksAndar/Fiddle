@@ -1,5 +1,6 @@
 .form-container {
-    max-width: 500px; /* Limit the form width */
+    width: 100%;
+    max-width: 500px !important; /* Limit the form width */
     margin: 0 auto; /* Center the form horizontally */
     padding: 20px; /* Padding around the form */
     background-color: #F7F9F9; /* Light background color */
@@ -81,3 +82,35 @@
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); /* Reset shadow */
   }
   
+  .signup-link {
+    font-weight: 600; /* Make the text bold */
+    font-size: 16px; /* Keep the font size consistent with the form */
+    color: #127388; /* Match the color with the rest of the UI */
+    text-decoration: none; /* Remove the underline */
+    margin-top: 20px; /* Add some space above the link */
+    display: inline-block; /* Allow margin and padding to take effect */
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline; /* Add an underline on hover for clarity */
+    color: #0F5B72; /* Slightly darker color on hover */
+  }
+  
+  .signup-link:active {
+    color: #0E4B59; /* Even darker color when the link is active */
+  }
+  
+  .checkbox-inline {
+    display: inline-flex; /* Inline-flex to keep them on the same line and centered */
+    align-items: center; /* Vertical alignment for both label and checkbox */
+  }
+  
+  .checkbox-inline input[type="checkbox"] {
+    margin-left: 5px; /* Space between label and checkbox */
+    transform: translateY(-3px); /* Adjust the vertical alignment by moving it slightly down */
+  }
+  
+  .inline-label {
+    font-weight: 600; /* Bold text */
+    margin: 0; /* Remove default margin */
+  }
