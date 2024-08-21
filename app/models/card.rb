@@ -8,4 +8,16 @@ class Card < ApplicationRecord
     after_create_commit { broadcast_append_to "cards" }
     after_update_commit { broadcast_replace_to "cards" }
     after_destroy_commit { broadcast_remove_to "cards" }
+
+    def reveal_scores!
+      update(visible: true)
+    end
+  
+    def hide_scores!
+      update(visible: false)
+    end
+  
+    def scores_visible?
+      visible
+    end
   end

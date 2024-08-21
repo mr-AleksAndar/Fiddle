@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "score_buttons_#{@score.card_id}" do %>
+  <!-- Replace the score buttons with a thank you message -->
+<% end %>
+
+<%= turbo_stream.append "user_scores_#{@score.card_id}" do %>
+  <li id="score_<%= @score.id %>"><%= @score.user.name %>: ✅</li>
+<% end %>

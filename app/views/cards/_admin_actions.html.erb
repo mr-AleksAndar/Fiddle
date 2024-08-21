@@ -1,0 +1,8 @@
+<% if current_user&.admin? %>
+    <%= link_to "Delete Card", card_path(card), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-button" %>
+    <% if card.visible %>
+        <%= link_to "Hide Scores", hide_scores_card_path(card), method: :patch, class: "hide-scores-button" %>
+    <% else %>
+        <%= link_to "Reveal Scores", reveal_scores_card_path(card), method: :patch, class: "reveal-scores-button" %>
+    <% end %>
+<% end %>   

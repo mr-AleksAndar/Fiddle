@@ -1,0 +1,17 @@
+<% if current_user && !current_user.scores.exists?(card_id: card.id) %>
+<%= form_with(model: Score.new, url: card_scores_path(card), local: true) do |form| %>
+  <%= form.hidden_field :card_id, value: card.id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="score-grid">
+    <%= form.submit "0.5", class: "score-button", name: "score[score]", value: 0.5 %>
+    <%= form.submit "1", class: "score-button", name: "score[score]", value: 1 %>
+    <%= form.submit "2", class: "score-button", name: "score[score]", value: 2 %>
+    <%= form.submit "3", class: "score-button", name: "score[score]", value: 3 %>
+    <%= form.submit "5", class: "score-button", name: "score[score]", value: 5 %>
+    <%= form.submit "8", class: "score-button", name: "score[score]", value: 8 %>
+    <%= form.submit "13", class: "score-button", name: "score[score]", value: 13 %>
+    <%= form.submit "20", class: "score-button", name: "score[score]", value: 20 %>
+  </div>
+<% end %>
+<% end %>

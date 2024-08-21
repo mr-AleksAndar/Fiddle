@@ -1,0 +1,19 @@
+<h2>Scores for this Card</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scores.each do |score| %>
+      <tr>
+        <td><%= score.user.name %></td>
+        <td><%= score.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Cards', cards_path, class: 'button' %>

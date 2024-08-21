@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "user_scores_#{@card.id}" do %>
+  <%= render partial: "cards/user_scores", locals: { card: @card } %>
+<% end %>
+
+<%= turbo_stream.replace "reveal_scores_button_#{@card.id}" do %>
+  <%= link_to "Hide Scores", hide_scores_card_path(@card), method: :patch, class: "delete-button" %>
+<% end %>

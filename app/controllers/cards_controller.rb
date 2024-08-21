@@ -1,13 +1,17 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[ show edit update destroy ]
+  before_action :set_card, only: %i[show edit update destroy reveal_scores hide_scores]
+
 
   def index
     @cards = Card.all
     @card = Card.new
   end
 
-  def show
-  end
+  
+      def show
+        @card = Card.find(params[:id])
+        @scores = @card.scores.includes(:user) # Preload users to avoid N+1 queries
+      end
 
   def edit
     @card = Card.find(params[:id])
@@ -43,12 +47,55 @@ class CardsController < ApplicationController
     end
   end
 
+  def reveal_scores
+    @card.update(visible: true)
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "user_scores_#{@card.id}",
+        partial: "cards/user_scores",
+        locals: { card: @card }
+  
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "admin_actions_#{@card.id}",
+        partial: "cards/admin_actions",
+        locals: { card: @card }
+  end
+  
+  def hide_scores
+    if @card.update(visible: false)
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "user_scores_#{@card.id}",
+        partial: "cards/user_scores",
+        locals: { card: @card }
+  
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "admin_actions_#{@card.id}",
+        partial: "cards/admin_actions",
+        locals: { card: @card }
+  
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }) }
+        format.html { head :no_content } # or another response for non-turbo requests
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to cards_path, alert: 'Card not found.' }
+        format.json { render json: { error: 'Card not found' }, status: :not_found }
+      end
+    end
+  end
+
   def destroy
-    @card.destroy
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
-      format.json { head :no_content }
+      if @card.destroy
+        Turbo::StreamsChannel.broadcast_update_to "cards", target: "cards", partial: "cards/reload"
+        format.turbo_stream
+        format.html { redirect_to cards_path, notice: 'Card was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('cards', partial: 'cards/reload') }
+        format.html { redirect_to cards_path, alert: 'Unable to delete card.' }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
     end
   end
 
