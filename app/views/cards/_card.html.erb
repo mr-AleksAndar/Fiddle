@@ -10,7 +10,9 @@
 
   <!-- Second Column: User Names and Scores -->
   <td id="user_scores_<%= card.id %>" class="user-scores">
-    <%= render partial: 'cards/user_scores', locals: { card: card } %>
+    <%= turbo_frame_tag "user_scores_#{card.id}" do %>
+      <%= render partial: 'cards/user_scores', locals: { card: card } %>
+    <% end %>
   </td>
 
   <!-- Third Column: Score Buttons -->
@@ -20,6 +22,8 @@
 
   <!-- Fourth Column: Admin-only Actions -->
   <td id="admin_actions_<%= card.id %>" class="admin-actions">
+    <% if current_user&.admin? %>
     <%= render partial: 'cards/admin_actions', locals: { card: card } %>
+    <% end %>
   </td>
 </tr>

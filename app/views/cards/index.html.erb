@@ -1,4 +1,6 @@
-<div class="main-container">
+<div id="main-container">
+  <%= turbo_stream_from "cards" %>
+
   <table>
     <thead>
       <tr>
@@ -10,11 +12,37 @@
       </tr>
     </thead>
     <tbody>
-      <%= turbo_stream_from "cards" %>
-      <%= turbo_frame_tag "cards" do %>
-        <%= render 'cards/cards_list', cards: @cards %>
+      <% @cards.order(id: :desc).each do |card| %>
+        <tr id="card_<%= card.id %>">
+          <!-- First Column: Trello Card -->
+          <td data-controller="trello">
+            <div class="card-content">
+              <blockquote class="trello-card">
+                <a href="<%= card.url %>">Trello Card</a>
+              </blockquote>
+            </div>
+          </td>
+
+          <!-- Second Column: User Names and Scores -->
+          <td id="user_scores_<%= card.id %>" class="user-scores">
+            <%= turbo_frame_tag "user_scores_#{card.id}" do %>
+              <%= render partial: 'cards/user_scores', locals: { card: card } %>
+            <% end %>
+          </td>
+
+          <!-- Third Column: Score Buttons -->
+          <td id="score_buttons_<%= card.id %>" class="score-buttons">
+            <%= render partial: 'cards/score_buttons', locals: { card: card } %>
+          </td>
+
+          <!-- Fourth Column: Admin-only Actions -->
+          <td id="admin_actions_<%= card.id %>" class="admin-actions">
+            <%= turbo_frame_tag "admin_actions_#{card.id}" do %>
+              <%= render partial: 'cards/admin_actions', locals: { card: card } %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
-  <br>
 </div>

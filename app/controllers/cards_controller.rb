@@ -16,14 +16,16 @@ class CardsController < ApplicationController
   def edit
     @card = Card.find(params[:id])
   end
-
   def create
     @card = Card.new(card_params)
   
     respond_to do |format|
       if @card.save
-        Turbo::StreamsChannel.broadcast_update_to "cards", target: "cards", partial: "cards/reload"
-        format.turbo_stream
+        Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "main-container",
+        partial: "cards/reload"
+        
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("main-container", partial: "cards/reload") }
         format.html { redirect_to cards_path, notice: 'Card was successfully created.' }
         format.json { render :show, status: :created, location: @card }
       else
@@ -48,7 +50,7 @@ class CardsController < ApplicationController
   end
 
   def reveal_scores
-    @card.update(visible: true)
+    if @card.update(visible: true)
       Turbo::StreamsChannel.broadcast_replace_to "cards",
         target: "user_scores_#{@card.id}",
         partial: "cards/user_scores",
@@ -58,6 +60,7 @@ class CardsController < ApplicationController
         target: "admin_actions_#{@card.id}",
         partial: "cards/admin_actions",
         locals: { card: @card }
+    end
   end
   
   def hide_scores
@@ -71,16 +74,6 @@ class CardsController < ApplicationController
         target: "admin_actions_#{@card.id}",
         partial: "cards/admin_actions",
         locals: { card: @card }
-  
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }) }
-        format.html { head :no_content } # or another response for non-turbo requests
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to cards_path, alert: 'Card not found.' }
-        format.json { render json: { error: 'Card not found' }, status: :not_found }
-      end
     end
   end
 
