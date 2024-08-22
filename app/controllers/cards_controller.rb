@@ -50,15 +50,21 @@ class CardsController < ApplicationController
   end
 
   def reveal_scores
-    @card = Card.find(params[:id]) # Ensure you're finding the card first if it's not set elsewhere
     if @card.update(visible: true)
+      # Broadcast the user scores update to all subscribed users
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "user_scores_#{@card.id}",
+        partial: "cards/user_scores",
+        locals: { card: @card }
+  
+      # Broadcast the admin actions update to all subscribed users
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "admin_actions_#{@card.id}",
+        partial: "cards/admin_actions",
+        locals: { card: @card }
+  
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }),
-            turbo_stream.replace("admin_actions_#{@card.id}", partial: "cards/admin_actions", locals: { card: @card })
-          ]
-        end
+        format.turbo_stream # This will automatically render reveal_scores.turbo_stream.erb for the initiating user
         format.html { redirect_to cards_path, notice: 'Scores revealed successfully.' }
       end
     else
@@ -69,15 +75,21 @@ class CardsController < ApplicationController
   end
   
   def hide_scores
-    @card = Card.find(params[:id]) # Ensure you're finding the card first if it's not set elsewhere
     if @card.update(visible: false)
+      # Broadcast the user scores update to all subscribed users
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "user_scores_#{@card.id}",
+        partial: "cards/user_scores",
+        locals: { card: @card }
+  
+      # Broadcast the admin actions update to all subscribed users
+      Turbo::StreamsChannel.broadcast_replace_to "cards",
+        target: "admin_actions_#{@card.id}",
+        partial: "cards/admin_actions",
+        locals: { card: @card }
+  
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }),
-            turbo_stream.replace("admin_actions_#{@card.id}", partial: "cards/admin_actions", locals: { card: @card })
-          ]
-        end
+        format.turbo_stream # This will automatically render hide_scores.turbo_stream.erb for the initiating user
         format.html { redirect_to cards_path, notice: 'Scores hidden successfully.' }
       end
     else

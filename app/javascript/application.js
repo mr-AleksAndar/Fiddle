@@ -1,4 +1,4 @@
-// application.js
+// app/javascript/application.js
 
 import { Application } from "@hotwired/stimulus"
 import "@hotwired/turbo-rails"
@@ -19,21 +19,8 @@ export { application }
 document.addEventListener('turbo:load', () => {
   console.log('Turbo loaded, reinitializing controllers');
 
-  // Ensure Stimulus controllers, including TrelloController, are connected
-  const application = window.Stimulus;
-  const trelloController = application.getControllerForElementAndIdentifier(document, 'trello');
-
-  if (!trelloController) {
-    console.log('TrelloController is not connected. Connecting now...');
-    // Manually connect the Trello controller if it's not connected
-    const trelloElements = document.querySelectorAll('[data-controller="trello"]');
-    trelloElements.forEach((element) => {
-      application.getControllerForElementAndIdentifier(element, 'trello') || 
-        application.controllers.push(new window.Stimulus.controllers['trello']({ element }));
-    });
-  } else {
-    console.log('TrelloController is already connected.');
-  }
-
-  // Any other reinitialization logic you might need
+  // Stimulus should automatically reconnect controllers for any new content loaded by Turbo.
+  // However, if you need custom JavaScript reinitialization, do it here.
+  
+  // For example, you might manually call initialization functions for third-party libraries.
 });

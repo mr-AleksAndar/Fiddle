@@ -1,8 +1,8 @@
-<ul>
-  <% card.scores.includes(:user).each do |score| %>
-    <li id="score_<%= score.id %>">
-      <%= score.user.name %>: 
-      <%= card.visible? ? score.score : "✅" %>
-    </li>
-  <% end %>
-</ul>
+<div id="user_scores_<%= card.id %>">
+  <!-- User scores content goes here -->
+  <ul>
+    <% card.scores.each do |score| %>
+      <li><%= score.user.name %>: <%= card.visible? ? score.score : '✅' %></li>
+    <% end %>
+  </ul>
+</div>

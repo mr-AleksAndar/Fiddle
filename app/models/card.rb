@@ -5,8 +5,6 @@ class Card < ApplicationRecord
     has_many :scores, dependent: :destroy
     has_many :users, through: :scores
 
-    after_create_commit { broadcast_append_to "cards" }
-    after_update_commit { broadcast_replace_to "cards" }
     after_destroy_commit { broadcast_remove_to "cards" }
 
     def reveal_scores!
