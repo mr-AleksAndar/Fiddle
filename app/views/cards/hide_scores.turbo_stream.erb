@@ -1,0 +1,7 @@
+<%= turbo_stream.append "user_scores_#{@card.id}" do %>
+  <%= render partial: "cards/user_scores", locals: { card: @card, hide_scores: true } %>
+<% end %>
+
+<%= turbo_stream.replace "admin_actions_#{@card.id}" do %>
+  <%= render partial: "cards/admin_actions", locals: { card: @card } %>
+<% end %>

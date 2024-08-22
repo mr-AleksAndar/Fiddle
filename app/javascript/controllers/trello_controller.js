@@ -1,3 +1,5 @@
+// trello_controller.js
+
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -16,7 +18,9 @@ export default class extends Controller {
       document.body.appendChild(script)
     } else {
       // Reinitialize the script if it's already present
-      window.TrelloCards.initialize()
+      if (window.TrelloCards && typeof window.TrelloCards.initialize === 'function') {
+        window.TrelloCards.initialize()
+      }
     }
   }
 }

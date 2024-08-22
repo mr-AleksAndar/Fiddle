@@ -50,30 +50,40 @@ class CardsController < ApplicationController
   end
 
   def reveal_scores
+    @card = Card.find(params[:id]) # Ensure you're finding the card first if it's not set elsewhere
     if @card.update(visible: true)
-      Turbo::StreamsChannel.broadcast_replace_to "cards",
-        target: "user_scores_#{@card.id}",
-        partial: "cards/user_scores",
-        locals: { card: @card }
-  
-      Turbo::StreamsChannel.broadcast_replace_to "cards",
-        target: "admin_actions_#{@card.id}",
-        partial: "cards/admin_actions",
-        locals: { card: @card }
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }),
+            turbo_stream.replace("admin_actions_#{@card.id}", partial: "cards/admin_actions", locals: { card: @card })
+          ]
+        end
+        format.html { redirect_to cards_path, notice: 'Scores revealed successfully.' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to cards_path, alert: 'Failed to reveal scores.' }
+      end
     end
   end
   
   def hide_scores
+    @card = Card.find(params[:id]) # Ensure you're finding the card first if it's not set elsewhere
     if @card.update(visible: false)
-      Turbo::StreamsChannel.broadcast_replace_to "cards",
-        target: "user_scores_#{@card.id}",
-        partial: "cards/user_scores",
-        locals: { card: @card }
-  
-      Turbo::StreamsChannel.broadcast_replace_to "cards",
-        target: "admin_actions_#{@card.id}",
-        partial: "cards/admin_actions",
-        locals: { card: @card }
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("user_scores_#{@card.id}", partial: "cards/user_scores", locals: { card: @card }),
+            turbo_stream.replace("admin_actions_#{@card.id}", partial: "cards/admin_actions", locals: { card: @card })
+          ]
+        end
+        format.html { redirect_to cards_path, notice: 'Scores hidden successfully.' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to cards_path, alert: 'Failed to hide scores.' }
+      end
     end
   end
 

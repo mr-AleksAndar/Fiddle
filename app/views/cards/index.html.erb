@@ -1,48 +1,45 @@
-<div id="main-container">
+<div id="main-container" class="cards-grid">
   <%= turbo_stream_from "cards" %>
 
-  <table>
-    <thead>
-      <tr>
-        <th>
-          <%= turbo_frame_tag "new_card" do %>
-            <%= render 'form', card: @card %>
-          <% end %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cards.order(id: :desc).each do |card| %>
-        <tr id="card_<%= card.id %>">
-          <!-- First Column: Trello Card -->
-          <td data-controller="trello">
-            <div class="card-content">
-              <blockquote class="trello-card">
-                <a href="<%= card.url %>">Trello Card</a>
-              </blockquote>
-            </div>
-          </td>
+  <!-- Form for new card -->
+  <div class="grid-item new-card">
+    <%= turbo_frame_tag "new_card" do %>
+      <%= render 'form', card: @card %>
+    <% end %>
+  </div>
 
-          <!-- Second Column: User Names and Scores -->
-          <td id="user_scores_<%= card.id %>" class="user-scores">
-            <%= turbo_frame_tag "user_scores_#{card.id}" do %>
-              <%= render partial: 'cards/user_scores', locals: { card: card } %>
-            <% end %>
-          </td>
+  <% @cards.order(id: :desc).each do |card| %>
+    <div class="grid-item card-content" id="card_<%= card.id %>">
+      <!-- Trello Card Column -->
+   
+      <div data-controller="trello" class="trello-card-column">
+        <blockquote class="trello-card">
+          <a href="<%= card.url %>">Trello Card</a>
+        </blockquote>
+      </div>
 
-          <!-- Third Column: Score Buttons -->
-          <td id="score_buttons_<%= card.id %>" class="score-buttons">
-            <%= render partial: 'cards/score_buttons', locals: { card: card } %>
-          </td>
+      <!-- User Names and Scores Column -->
+      <div class="user-scores-column" id="user_scores_<%= card.id %>">
+        <!-- Subscribe to the Turbo Stream for updates -->
+        <%= turbo_stream_from "user_scores_#{card.id}" %>
+        <!-- Turbo Frame that will be replaced with updates -->
+        <%= turbo_frame_tag "user_scores_#{card.id}" do %>
+          <!-- Render the partial that shows all scores -->
+          <%= render partial: 'cards/user_scores', locals: { card: card } %>
+        <% end %>
+      </div>
 
-          <!-- Fourth Column: Admin-only Actions -->
-          <td id="admin_actions_<%= card.id %>" class="admin-actions">
-            <%= turbo_frame_tag "admin_actions_#{card.id}" do %>
-              <%= render partial: 'cards/admin_actions', locals: { card: card } %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      <!-- Score Buttons Column -->
+      <div class="score-buttons-column" id="score_buttons_<%= card.id %>">
+        <%= render partial: 'cards/score_buttons', locals: { card: card } %>
+      </div>
+
+      <!-- Admin-only Actions Column -->
+      <div class="admin-actions-column" id="admin_actions_<%= card.id %>">
+        <%= turbo_frame_tag "admin_actions_#{card.id}" do %>
+          <%= render partial: 'cards/admin_actions', locals: { card: card } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

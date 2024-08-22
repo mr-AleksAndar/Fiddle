@@ -158,6 +158,7 @@
      display: inline; /* Display label inline with checkbox */
      margin-bottom: 0; /* Remove bottom margin from admin label */
      margin-left: 8px; /* Space between checkbox and label */
+     border: 0px;
  }
  
  .form-container input[type="checkbox"] {
@@ -311,3 +312,51 @@
     background-color: #dcdcdc;
     color: #808080;
   }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Four equal-width columns */
+    gap: 16px; /* Space between grid items */
+    padding: 16px;
+  }
+  
+  .grid-item {
+    border: 0px solid #ddd;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+  
+  .new-card {
+    grid-column: span 4; /* The new card form spans all four columns */
+  }
+  
+  .card-content {
+    display: contents; /* Allows children to be placed in grid without wrapper */
+  }
+  
+  .trello-card-column,
+  .user-scores-column,
+  .score-buttons-column,
+  .admin-actions-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .trello-card-column {
+    grid-column: 1; /* First column */
+  }
+  
+  .user-scores-column {
+    grid-column: 2; /* Second column */
+  }
+  
+  .score-buttons-column {
+    grid-column: 3; /* Third column */
+  }
+  
+  .admin-actions-column {
+    grid-column: 4; /* Fourth column */
+  }
+  
+  /* Additional styling for responsiveness, hover effects, etc. */
