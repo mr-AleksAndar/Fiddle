@@ -24,6 +24,7 @@
      width: 100px; /* Fixed width for uniform size */
      height: 40px; /* Fixed height for all buttons */
      padding: 0; /* Zero padding to prevent size variation */
+     margin-bottom: 2px;
      text-decoration: none;
      border-radius: 20px; /* Consistent rounded corners */
      font-weight: 600;
