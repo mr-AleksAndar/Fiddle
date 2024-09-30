@@ -8,7 +8,6 @@ services:
   - type: web
     name: trelloscores_app
     runtime: ruby
-    rubyVersion: '3.2.2'
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
