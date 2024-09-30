@@ -2,7 +2,6 @@ databases:
   - name: TrelloScores
     databaseName: TrelloScores
     user: trello
-    password: trello
     plan: free
 
 services:
