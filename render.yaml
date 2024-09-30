@@ -1,5 +1,5 @@
 databases:
-    name: trelloscores_db
+  - name: trelloscores_db
     databaseName: trelloscores_db
     user: trelloscores_user
     plan: free
