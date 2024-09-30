@@ -1,12 +1,12 @@
 databases:
-  - name: TrelloScores
-    databaseName: TrelloScores
-    user: trello
+    name: trelloscores_db
+    databaseName: trelloscores_db
+    user: trelloscores_user
     plan: free
 
 services:
   - type: web
-    name: TrelloScores
+   name: trelloscores_app
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: TrelloScores
+          name: trelloscores_db
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
