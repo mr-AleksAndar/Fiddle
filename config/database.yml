@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: hotwire_turbo_lazy_loading_2_production
-  username: hotwire_turbo_lazy_loading_2
-  password: <%= ENV["HOTWIRE_TURBO_LAZY_LOADING_2_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

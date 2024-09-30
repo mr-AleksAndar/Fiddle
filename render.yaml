@@ -10,7 +10,7 @@ services:
     runtime: ruby
     rubyVersion: '3.2.2'
     plan: free
-    buildCommand: "bundle install && bundle exec rake assets:precompile && bundle exec rails db:migrate"
+    buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
