@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.3"
+ruby "3.2.2"
 
 # Rails 7.1.3.4 or higher for latest features and security updates
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
