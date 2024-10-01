@@ -41,8 +41,7 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
-  # config.action_cable.url = "wss://example.com/cable"
-  # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
+  
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
@@ -65,8 +64,10 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'], namespace: 'cache' }
 
+  config.action_cable.url = ENV['WEBSOCKET_URL'] || "https://trelloscores-app.onrender.com/cable"
+  config.action_cable.allowed_request_origins = [ 'https://trelloscores-app.onrender.com', /https:\/\/trelloscores-app-.+\.onrender\.com/ ]
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "hotwire_turbo_lazy_loading_2_production"
