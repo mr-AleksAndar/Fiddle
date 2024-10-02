@@ -10,12 +10,14 @@ services:
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec rails server"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: trelloscores_db
           property: connectionString
+      - key: REDIS_URL
+        value: redis://red-cru0m0dds78s73fd5g8g:6379 # Make sure this is the correct Redis URL
       - key: RAILS_MASTER_KEY
         sync: false
       - key: WEB_CONCURRENCY
