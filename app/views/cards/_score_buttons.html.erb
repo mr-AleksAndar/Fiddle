@@ -1,5 +1,5 @@
 <% if current_user && !current_user.scores.exists?(card_id: card.id) %>
-<%= form_with(model: Score.new, url: card_scores_path(card), local: true) do |form| %>
+<%= form_with(model: Score.new, url: card_scores_path(card), data: { turbo: true }, format: :turbo_stream) do |form| %>
   <%= form.hidden_field :card_id, value: card.id %>
   <%= form.hidden_field :user_id, value: current_user.id %>
 

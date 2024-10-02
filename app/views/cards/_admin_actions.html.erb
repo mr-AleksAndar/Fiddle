@@ -1,11 +1,11 @@
 <% if current_user&.admin? %>
   <div id="admin_actions_<%= card.id %>">
-    <%= link_to 'Delete', card_path(card), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button' %>
+    <%= link_to 'Delete', card_path(card), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?'  }, class: 'delete-button' %>
     <% if card.visible? %>
-      <%= link_to 'Hide', hide_scores_card_path(card), method: :patch, class: 'delete-button' %>
-    <% else %>
-      <%= link_to 'Reveal', reveal_scores_card_path(card), method: :patch, class: 'delete-button' %>
-    <% end %>
+    <%= link_to 'Hide', hide_scores_card_path(card), method: :patch, data: { turbo_method: :patch }, class: 'delete-button', format: :turbo_stream %>
+  <% else %>
+    <%= link_to 'Reveal', reveal_scores_card_path(card), method: :patch, data: { turbo_method: :patch }, class: 'delete-button', format: :turbo_stream %>
+  <% end %>
   </div>
 <% else %>
   <div id="admin_actions_<%= card.id %>"></div>
