@@ -9,9 +9,9 @@ application.debug = false
 window.Stimulus   = application
 
 export { application }
-
+console.log('yo1')
 document.addEventListener('turbo:load', () => {
-  console.log('Turbo loaded, reinitializing controllers');
+  console.log('Turbo loaded, reinitializing controllers1');
 
   // Stimulus should automatically reconnect controllers for any new content loaded by Turbo.
   // However, if you need custom JavaScript reinitialization, do it here.
