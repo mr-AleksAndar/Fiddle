@@ -30,7 +30,7 @@ gem "stimulus-rails", ">= 1.3.3"
 gem "jbuilder", ">= 2.12.0"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 5.2.0"
+gem "redis", ">= 5.3.0"
 
 # Use SCSS for stylesheets
 gem 'sassc-rails', ">= 2.1.2"
