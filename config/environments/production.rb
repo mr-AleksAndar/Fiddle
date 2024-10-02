@@ -65,6 +65,9 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'], namespace: 'cache' }
+  
+  # Store sessions in Redis to avoid using cookies or the database for session storage
+config.session_store :cache_store, key: '_your_app_session', expire_after: 90.minutes
 
   config.action_cable.url = ENV['WEBSOCKET_URL'] || "https://trelloscores-app.onrender.com/cable"
   config.action_cable.allowed_request_origins = [ 'https://trelloscores-app.onrender.com', /https:\/\/trelloscores-app-.+\.onrender\.com/ ]
