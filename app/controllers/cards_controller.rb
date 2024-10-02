@@ -21,15 +21,24 @@ class CardsController < ApplicationController
   
     respond_to do |format|
       if @card.save
+        # 1. Broadcast a Turbo Stream to all other users to reload their page
         Turbo::StreamsChannel.broadcast_replace_to "cards",
-        target: "main-container",
-        partial: "cards/reload"
-        
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("main-container", partial: "cards/reload") }
+          target: "main-container",
+          partial: "cards/reload" # This partial contains JS to reload the page
+  
+        # 2. Respond to the user who submitted the request with a Turbo Stream update
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("main-container", partial: "cards/reload")
+        end
+  
+        # Optionally respond with an HTML redirect for non-Turbo users
         format.html { redirect_to cards_path, notice: 'Card was successfully created.' }
         format.json { render :show, status: :created, location: @card }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_card', partial: 'form', locals: { card: @card }) }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('new_card', partial: 'form', locals: { card: @card })
+        end
+  
         format.html { render :index, status: :unprocessable_entity }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
