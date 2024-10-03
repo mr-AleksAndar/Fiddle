@@ -95,7 +95,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # config/environments/production.rb
-  config.assets.debug = true  # This prevents source maps from being generated
+  config.assets.debug = false  # This prevents source maps from being generated
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
