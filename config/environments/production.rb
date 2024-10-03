@@ -67,7 +67,7 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'], namespace: 'cache' }
   
   # Store sessions in Redis to avoid using cookies or the database for session storage
-config.session_store :cache_store, key: '_your_app_session', expire_after: 90.minutes
+  config.session_store :cache_store, key: '_your_app_session', expire_after: 90.minutes
 
   config.action_cable.url = ENV['WEBSOCKET_URL'] || "https://trelloscores-app.onrender.com/cable"
   config.action_cable.allowed_request_origins = [ 'https://trelloscores-app.onrender.com', /https:\/\/trelloscores-app-.+\.onrender\.com/ ]
@@ -90,6 +90,9 @@ config.session_store :cache_store, key: '_your_app_session', expire_after: 90.mi
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # config/environments/production.rb
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
