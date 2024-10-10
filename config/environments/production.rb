@@ -27,7 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -48,7 +48,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -69,8 +69,6 @@ Rails.application.configure do
   # Store sessions in Redis to avoid using cookies or the database for session storage
   config.session_store :cache_store, key: '_your_app_session', expire_after: 90.minutes
 
-  config.action_cable.url = ENV['WEBSOCKET_URL'] || "https://trelloscores-app.onrender.com/cable"
-  config.action_cable.allowed_request_origins = [ 'https://trelloscores-app.onrender.com', /https:\/\/trelloscores-app-.+\.onrender\.com/ ]
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "hotwire_turbo_lazy_loading_2_production"
@@ -92,10 +90,14 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # config/environments/production.rb
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true
 
   # config/environments/production.rb
   config.assets.debug = false  # This prevents source maps from being generated
+
+  config.action_cable.url = 'ws://localhost:3000/cable'
+  config.action_cable.allowed_request_origins = [ 'http://localhost:3000', /http:\/\/127\.0\.0\.1:\d+/ ]
+  config.action_cable.disable_request_forgery_protection = true
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
