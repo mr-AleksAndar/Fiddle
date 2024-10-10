@@ -22,12 +22,10 @@
       <%= form.email_field :email, class: "form-input" %>
     </div>
 
-    <% if current_user.admin? %>
     <div class="checkbox-inline">
       <%= form.label :admin, 'Admin', class: 'inline-label' %>
       <%= form.check_box :admin %>
     </div>
-    <% end %>
 
     <div>
       <%= form.label :password, "New Password" %>
